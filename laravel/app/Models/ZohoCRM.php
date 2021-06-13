@@ -75,7 +75,7 @@ class ZohoCRM extends Model
 
     	$dataD = [[]];
     	$dataT = [[]];
-    	//циклы разделяют форму на две
+    	//циклы разделяют данные формы на два массива
     	foreach ($_POST as $key => $value) {
     		if($key=='Subject')
             	break;

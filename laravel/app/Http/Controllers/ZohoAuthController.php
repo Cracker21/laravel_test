@@ -8,8 +8,7 @@ use App\Models\ZohoAuth;
 class ZohoAuthController extends Controller
 {
 	public function auth(){
-		if(ZohoAuth::auth())
-			return redirect('deal');
+		echo json_encode(['msg' => ZohoAuth::auth()]);
 	}
 	public function logout(){
 		ZohoAuth::logout();

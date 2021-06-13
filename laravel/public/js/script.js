@@ -18,10 +18,11 @@ async function request(act, data){
 
     let res = await response.json();
     
-    if(res.status == 'unauth')
-      location.href = 'auth';
-
-    msg.innerHTML = res.status;
+    if(res.msg == 'unauth')
+        location.href = 'auth';
+    if(res.msg == 'ok')
+        location.href = 'deal';
+    msg.innerHTML = res.msg;
     setTimeout(()=>{
         msg.innerHTML="";
     },4000);

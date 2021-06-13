@@ -36,10 +36,9 @@
 			<input name="Status"><br>
 			<label>Priority</label>
 			<input name="Priority"><br>
-			<label>Reminder</label>
-			<input name="Reminder"><br>
 		</div>
 	</form>
+	<button><a href="logout">Logout</a></button>
 	<style>
 		.it{
 			display: inline-table;

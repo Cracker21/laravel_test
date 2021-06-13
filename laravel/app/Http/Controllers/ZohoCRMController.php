@@ -19,9 +19,9 @@ class ZohoCRMController extends Controller
 		if(session()->has('client_id')){
 			if(!isset($_COOKIE['acctok']))
 				ZohoAuth::setAccessToken();
-			echo json_encode(['status' => ZohoCRM::create()]);
+			echo json_encode(['msg' => ZohoCRM::create()]);
 		}else{
-			echo json_encode(['status' => 'unauth']);
+			echo json_encode(['msg' => 'unauth']);
 		}
 	}
 }

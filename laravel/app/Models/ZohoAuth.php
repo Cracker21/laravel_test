@@ -10,7 +10,8 @@ class ZohoAuth
 	static $auth_token, $client_id, $client_secret, $refresh_token, $error = "";
 
 	static function logout(){
-		unset($_SESSION);
+		session()->flush();
+		setcookie("acctok", "", time()-3600);
 	}
 
 	static function auth(){
@@ -21,11 +22,10 @@ class ZohoAuth
 		self::setRefreshToken();
 		self::setAccessToken();
 
-		if(!empty(self::$error)){
-			echo self::$error;
-			return;
+		if(empty(self::$error)){
+			return 'ok';
 		}else{
-			return true;
+			return self::$error;
 		}
 	}
 	private static function setRefreshToken(){
