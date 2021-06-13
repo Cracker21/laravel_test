@@ -12,14 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 \Debugbar::disable();
+
 Route::get('/', function(){
 	return redirect('deal');
-});
-
-Route::get('result', function(){
-	return view('result', ['res' => session('result')]);
 });
 
 Route::get('deal', 'App\Http\Controllers\ZohoCRMController@dealForm');

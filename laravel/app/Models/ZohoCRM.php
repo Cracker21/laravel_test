@@ -10,13 +10,22 @@ class ZohoCRM extends Model
 	private static $lastDealId;
 
 	private static function fieldsAreNotCorrect(){
+		//Разделил чтобы удобнее было читать.
+		//Проверка поверхностная.
 		if(empty($_POST['Deal_Name'])||empty($_POST['Stage'])||empty($_POST['Subject']))
 			return true;
-		if(is_numeric($_POST['Amount'])||is_numeric($_POST['Probability']))
+		if(!empty($_POST['Amount'])&&!is_numeric($_POST['Amount']))
 			return true;
+		if(!empty($_POST['Probability'])&&!is_numeric($_POST['Probability'])){
+			return true;
+		}else{
+			$prob = intval($_POST['Probability']);
+			if(!((1 <= $prob)&&($prob <= 100)))
+				return true;
+		}
 	}
 
-	private static function req($module, $data=null){
+	private static function req($module, $data){
 		$curl_pointer = curl_init();
         
         $requestBody = json_encode(["data" => $data]);
@@ -47,9 +56,8 @@ class ZohoCRM extends Model
 	}
 	private static function createTask($data){
 
-        $dealId = self::$lastDealId;
         $data[0]['$se_module'] = 'Deals';
-        $data[0]['What_Id'] = $dealId;
+        $data[0]['What_Id'] = self::$lastDealId;
 
 		$res = self::req('Task', $data);
 		if(isset($res['data'][0]['code'])&&$res['data'][0]['code'] == "SUCCESS")
@@ -71,7 +79,7 @@ class ZohoCRM extends Model
     static function create(){
 
     	if(self::fieldsAreNotCorrect())
-    		return 'Fill in all required fields';
+    		return 'Enter correct data';
 
     	$dataD = [[]];
     	$dataT = [[]];
@@ -85,10 +93,12 @@ class ZohoCRM extends Model
             $dataT[0][$key] = $value;
         }
     	$msg = "";
-    	if(self::createDeal($dataD))
-    		$msg.='Deal was created!';
-    	else
+    	if(self::createDeal($dataD)){
+    		$msg.='Deal was created!';	
+    	}else{
     		$msg.= 'Error while creating deal!';
+    		return $msg;
+    	}
     	if(self::createTask($dataT))
     		$msg.="<br>Task was created!";
     	else

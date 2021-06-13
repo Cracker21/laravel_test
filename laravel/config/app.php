@@ -3,14 +3,6 @@
 return [
 
 
-
-    //zoho
-    'refresh_token' => env('REFRESH_TOKEN'),
-    //'auth_token' => env('AUTH_TOKEN'),
-    'access_token' => env('ACCESS_TOKEN'),
-    'client_id' => env('CLIENT_ID'),
-    'client_secret' => env('CLIENT_SECRET'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Name

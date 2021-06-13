@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ZohoAuth
 {
-	static $auth_token, $client_id, $client_secret, $refresh_token, $error = "";
+	private static $auth_token, $client_id, $client_secret, $refresh_token, $error = "";
 
 	static function logout(){
 		session()->flush();
@@ -46,6 +46,11 @@ class ZohoAuth
 		session(['refresh_token' =>  $std->refresh_token])	;
 	}
 	static function setAccessToken(){
+		/*
+			Этот метод устанавливает токен доступа Zoho,
+			который необходимо обновлять каждый час.
+			Поэтому, если данных класса нет, значит данные берутся с сессии
+		*/
 		session(['client_id' => self::$client_id ?? session('client_id')]);
 		session(['client_secret' => self::$client_secret ?? session('client_secret')]);
 		session(['refresh_token' => self::$refresh_token ?? session('refresh_token')]);

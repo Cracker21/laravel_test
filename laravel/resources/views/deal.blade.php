@@ -22,8 +22,6 @@
 			<input name="Amount"><br>
 			<label>Lead Source</label>
 			<input name="Lead_Source"><br>
-			<label>Closing Date</label>
-			<input name="Closing_Date"><br>
 			<label>Probability</label>
 			<input name="Probability"><br>
 			<input type="submit" value="Create deal">

@@ -9,6 +9,8 @@ use App\Models\ZohoAuth;
 class ZohoCRMController extends Controller
 {
     function dealForm(){
+    	//Проверка авторизации, скорее всего, должна быть не здесь,
+    	//но я дошёл пока только до этого этапа
     	if(session()->has('client_id')){
 			return view('deal');
 		}else{
