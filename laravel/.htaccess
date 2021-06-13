@@ -1,0 +1,4 @@
+Options All -Indexes
+DirectorySlash Off
+RewriteEngine On
+RewriteRule ^(.*)$ public/index.php [QSA,END]
